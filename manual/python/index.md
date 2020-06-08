@@ -60,3 +60,19 @@ root [3] TPython::Prompt()
 >>> print i
 2
 {% endhighlight %}
+
+
+## MultiPython Build and Installation
+
+Starting from version 6.22, PyROOT libraries are built by default with both Python3 and Python2 if a version of CMake >= 3.14 is used. For each Python version X.Y used to build PyROOT (e.g. 3.8, 2.7, etc.) the following libraries (containing the C++ extensions) will appear both in the build directory and in the installation directory:
+- `libROOTPythonizationsX_Y.so`
+- `libcppyX_Y.so`
+- `libcppyy_backendX_Y.so`
+The following pure Python packages will appear as well:
+- `ROOT`
+- `cppyy`
+- `cppyy_backend`
+- `JupyROOT`
+- `JsMVA`
+If no option is specified, PyROOT will be built for the most recent Python3 and Python2 versions that CMake can find. If only one version can be found, PyROOT will be built for only that version. Moreover, for a given Python installation to be considered, it must provide both the Python interpreter (binary) and the development package. To build PyROOT, it is thus suggested to verify that python-dev is present and [install it](https://pypi.org/project/python-dev-tools/) if not.
+PyROOT can be built with only one version of Python even if multiple installations are present in the system. For this purpose, the option `-DPYTHON_EXECUTABLE=/path/to/python_exec` can be used to point to the desired Python installation.
